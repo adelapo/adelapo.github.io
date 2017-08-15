@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+}
+
+#main {
+  margin-left: 15%;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+#main p, #main ul {
+  font-family: "Open Sans", sans-serif;
+  background-color: white;
+}
+
+#main h1 {
+  font-family: "Consolas", sans-serif;
+  font-size: 30pt;
+  background-color: lightgray;
+}
+
+#my_nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: lightgray;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+#my_nav li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-family: "Open Sans", sans-serif;
+}
+
+#my_nav li a.active {
+    background-color: darkblue;
+    color: white;
+}
+
+#my_nav li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
