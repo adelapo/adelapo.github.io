@@ -13,9 +13,12 @@ body {
   background-color: white;
 }
 
-#main h1 {
+#main img {
+  text-align: center;
+}
+
+#main h1, #main h2 {
   font-family: "Consolas", sans-serif;
-  font-size: 30pt;
   background-color: lightgray;
 }
 
@@ -39,8 +42,8 @@ body {
 }
 
 #my_nav li a.active {
-    background-color: darkblue;
-    color: white;
+    background-color: rgb(0, 50, 98);
+    color: gold;
 }
 
 #my_nav li a:hover:not(.active) {
