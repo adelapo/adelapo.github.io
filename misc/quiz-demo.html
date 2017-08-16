@@ -3,6 +3,7 @@
 <head>
   <title>Miscellaneous</title>
   <link href="/style.css" rel="stylesheet" type="text/css">
+  <script src="quiz.js"></script>
 </head>
 <body>
 
@@ -20,9 +21,19 @@
   <!-- END NAV -->
 
   <div id="main">
-    <h1>Miscellaneous</h1>
-    <p>Eventually I'll add some other stuff I like in this area.</p>
-    <a href="quiz-demo.html">Example Quiz</a>
+    <h1>Quiz Demo</h1>
+    <p>This is a demo quiz using HTML, CSS, and JavaScript.</p>
+    <p>Good luck!</p>
+    <div id="quiz">
+      <p>Q1: What is the meaning of life, the universe, and everything?</p>
+      <input type="text" id="q1">
+      <p>Q2: What is 2 + 2?</p>
+      <input type="text" id="q2">
+      <p>Q3: What does HTML stand for?</p>
+      <input type="text" id="q3">
+      <p>When you're done, click the button below to see your score.</p>
+      <button onclick="submit()">Submit!</button>
+    </div>
   </div>
 
 </body>
