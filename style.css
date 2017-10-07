@@ -32,6 +32,10 @@ body {
   font-weight: bold;
 }
 
+#main h3 {
+	font-family: "Open Sans", sans-serif;
+}
+
 #main a {
   font-family: "Open Sans", sans-serif;
   text-decoration: none;
@@ -48,6 +52,14 @@ body {
   font-weight: bold;
   border: solid gold;
   padding: 15px 30px;
+}
+
+#main code {
+	font-family: monospace;
+	background-color: lightgray;
+	border-left: 5px solid darkgray;
+	padding: 0px 6px;
+	margin: 0px;
 }
 
 #my_nav ul {

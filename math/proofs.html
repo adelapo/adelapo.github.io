@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Proofs</title>
+  <link href="../style.css" rel="stylesheet" type="text/css">
+  <script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+	  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+	});
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</head>
+<body>
+
+  <!-- BEGIN NAV -->
+  <div id="my_nav">
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About Me</a></li>
+      <li><a class="active" href="index.html">Mathematics</a></li>
+      <li><a href="../coding/index.html">Coding</a></li>
+      <li><a href="../math-coding/index.html">Math + CS</a></li>
+      <li><a href="../misc/index.html">Miscellaneous</a></li>
+    </ul>
+  </div>
+  <!-- END NAV -->
+
+  <div id="main">
+	  <h1>My Favorite Proofs</h1>
+	  <h3>Proof 1: <i>Prove that for all integers $n>2$, $\sqrt[n]{2}$ is irrational.</i></h3>
+	  <p>Use a proof by contradiction. Assume there exist integers $a,b$ such that $$\frac{a}{b}=\sqrt[n]{2}$$</p>
+	  <p>The first step is to put each side to the power of $n$.</p>
+	  <p>$$\left( \frac{a}{b} \right)^n = 2$$</p>
+	  <p>That simplifies to</p>
+	  <p>$$\frac{a^n}{b^n} = 2$$</p>
+	  <p>Finally, multiply each side by $b^n$ to get</p>
+	  <p>$$a^n = 2b^n$$</p>
+	  <p>We know that $2b^n=b^n+b^n$. So the equation becomes</p>
+	  <p>$$a^n = b^n + b^n$$</p>
+	  <p>Recall Fermat's Last Theorem, which took 358 years to solve: there exists no such integer $n>2$ and integers $a,b,c$ such that $a^n+b^n=c^n$.</p>
+	  <p>Applying Fermat's Last Theorem shows there are no integer solutions to $a^n = b^n + b^n$. This means there do not exist integers $a,b$ such that $\frac{a}{b}=\sqrt[n]{2}$, and so $\sqrt[n]{2}$ is irrational. $\square$</p>
+  </div>
+
+</body>
+</html>
