@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chaos Game</title>
+		<link href="chaos.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+		<script src="chaos.js"></script>
+	</head>
+	<body>
+		<h1>The Chaos Game</h1>
+		<fieldset>
+			<legend>Chaos Game Parameters</legend>
+			<p>Number of vertices:</p>
+			<input id="verts" type="number" value="3">
+
+			<p>Distance Factor:</p>
+			<input id="factor" type="text" value="0.5">
+
+			<p>Number of iterations:</p>
+			<input id="points" type="number" value="100000">
+
+			<button onclick="startChaos()">Go!</button>
+		</fieldset>
+		<br><br>
+	</body>
+</html>

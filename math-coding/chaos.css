@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans');
+
+body {
+	background-color: black;
+	justify-content: center;
+	align-items: center;
+}
+
+h1 {
+	color: white;
+	font-family: "Inconsolata";
+	font-size: 30pt;
+	text-align: center;
+}
+
+p {
+	color: white;
+	font-family: "Inconsolata";
+}
+
+legend {
+	color: white;
+	font-family: "Inconsolata";
+}
+
+canvas {
+	align: center;
+}
