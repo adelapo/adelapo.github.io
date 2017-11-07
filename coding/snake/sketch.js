@@ -14,16 +14,17 @@ var gameOver = false;
 var moveLoop;
 
 function setup() {
-	createCanvas(canvasDim, canvasDim);
+	createCanvas(canvasDim, canvasDim + SQUARE_SIZE);
 	spawnApple();
 	moveLoop = setInterval(moveSnake, 80);
 }
 
 function draw() {
-	background(40);
+	background(52, 55, 61);
 	// drawGrid();
 	drawSnake();
 	drawApple();
+	drawScore();
 	checkForApple();
 	if (checkForCollision()) {
 		// GAME OVER!
@@ -32,8 +33,31 @@ function draw() {
 	}
 }
 
+function showStartScreen() {
+	
+}
+
+function startGame() {
+	
+}
+
+function drawScore() {
+	strokeWeight(1);
+	stroke(0, 255, 0);
+	fill(0, 255, 0);
+	var scoreString = "Score: " + score;
+	textSize(SQUARE_SIZE);
+	textAlign(CENTER);
+	text(scoreString, canvasDim / 2, canvasDim + 5);
+	strokeWeight(4);
+	stroke(0, 255, 0);
+	line(0, canvasDim - SQUARE_SIZE, canvasDim, canvasDim - SQUARE_SIZE);
+	noFill();
+	rect(0, 0, canvasDim, canvasDim + SQUARE_SIZE);
+}
+
 function spawnApple() {
-	apple = [Math.floor(random(numSqs)), Math.floor(random(numSqs))];
+	apple = [Math.floor(random(numSqs)), Math.floor(random(numSqs - 1))];
 }
 
 function drawApple() {
@@ -46,10 +70,12 @@ function drawApple() {
 function checkForCollision() {
 	var head = snake[0];
 	
-	if (head[0] < 0 || head[0] > numSqs - 1 || head[1] < 0 || head[1] > numSqs - 1) {
+	// Check boundary collision
+	if (head[0] < 0 || head[0] > numSqs - 1 || head[1] < 0 || head[1] > numSqs - 2) {
 		return true;
 	}
 	
+	// Check self-collision
 	for (var i = 1; i < snake.length; i++) {
 		if (head[0] == snake[i][0] && head[1] == snake[i][1]) {
 			return true;
@@ -65,9 +91,7 @@ function checkForApple() {
 			score = score + 1;
 			spawnApple();
 		}
-	}
-	
-	
+	}	
 }
 
 function moveSnake() {
