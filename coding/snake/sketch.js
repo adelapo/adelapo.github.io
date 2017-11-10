@@ -5,6 +5,8 @@ var paused = false;
 var growth = 0;
 var apple = [0, 0];
 
+var turning = false;
+
 var numSqs = 25;
 
 var SQUARE_SIZE = 25;
@@ -99,6 +101,8 @@ function moveSnake() {
 		return;
 	}
 	
+	turning = false;
+	
 	var dx = 0;
 	var dy = 0;
 	
@@ -129,15 +133,22 @@ function moveSnake() {
 function keyPressed() {
 	if (keyCode === 32) {
 		paused = !paused;
-	} else if (keyCode === LEFT_ARROW && direction != "right" && !paused) {
-		direction = "left";
-	} else if (keyCode === RIGHT_ARROW && direction != "left" && !paused) {
-		direction = "right";
-	} else if (keyCode === UP_ARROW && direction != "down" && !paused) {
-		direction = "up";
-	} else if (keyCode === DOWN_ARROW && direction != "up" && !paused) {
-		direction = "down";
-	} 
+	}
+	if (!paused && !turning) {
+		if (keyCode === LEFT_ARROW && direction != "right") {
+			direction = "left";
+			turning = true;
+		} else if (keyCode === RIGHT_ARROW && direction != "left") {
+			direction = "right";
+			turning = true;
+		} else if (keyCode === UP_ARROW && direction != "down") {
+			direction = "up";
+			turning = true;
+		} else if (keyCode === DOWN_ARROW && direction != "up") {
+			direction = "down";
+			turning = true;
+		}
+	}  
 }
 
 function drawSnake() {
