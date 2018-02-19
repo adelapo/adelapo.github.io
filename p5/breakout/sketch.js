@@ -1,81 +1,137 @@
-//breakout close (core mechanics)
-//mouse to control the paddle, click to start
-
-var paddle, ball, wallTop, wallBottom, wallLeft, wallRight;
+var ball;
+var paddle;
 var bricks;
-var MAX_SPEED = 9;
+
+var wallTop;
+var wallBottom;
+var wallLeft;
+var wallRight;
+
+var numBricksWide = 16;
+var numBricksHigh = 6;
+
+var BRICK_WIDTH = 50;
+var BRICK_HEIGHT = 30;
+
+var BALL_SIZE = 15;
+var BALL_DEFAULT_Y = 400;
+
+var PADDLE_WIDTH = 130;
+var PADDLE_HEIGHT = 20;
+
+var ballInPlay = false;
+var PADDLE_Y = 500;
+
 var WALL_THICKNESS = 30;
-var BRICK_W = 40;
-var BRICK_H = 20;
-var BRICK_MARGIN = 4;
-var ROWS = 9;
-var COLUMNS = 16;
+
+var beepFreq = 196;
+
+var ballTrail = [];
+var maxTrailLength = 15;
 
 function setup() {
-  createCanvas(800,600);
-  
-  paddle = createSprite(width/2, height-50, 100, 10);
-  paddle.immovable = true;
+	createCanvas(800, 600);
+	
+	bricks = new Group();
+	
+	var colors = ["red", color(255, 123, 0), "orange", "yellow", color(9, 226, 2), color(59, 56, 255)];
+	
+	for (var i = 0; i < numBricksHigh; i++) {
+		for (var j = 0; j < numBricksWide; j++) {
+			var brick = createSprite(j * BRICK_WIDTH + BRICK_WIDTH / 2, i * BRICK_HEIGHT + BRICK_HEIGHT / 2 + 80, BRICK_WIDTH, BRICK_HEIGHT);
+			brick.shapeColor = colors[i];
+			brick.immovable = true;
+			bricks.add(brick);
+		}
+	}
+	
+	wallTop = createSprite(width/2, -WALL_THICKNESS/2, width+WALL_THICKNESS*2, WALL_THICKNESS);
+	wallTop.immovable = true;
 
-  wallTop = createSprite(width/2, -WALL_THICKNESS/2, width+WALL_THICKNESS*2, WALL_THICKNESS);
-  wallTop.immovable = true;
-  
-  wallBottom = createSprite(width/2, height+WALL_THICKNESS/2, width+WALL_THICKNESS*2, WALL_THICKNESS);
-  wallBottom.immovable = true;
-  
-  wallLeft = createSprite(-WALL_THICKNESS/2, height/2, WALL_THICKNESS, height);
-  wallLeft.immovable = true;
-  
-  wallRight = createSprite(width+WALL_THICKNESS/2, height/2, WALL_THICKNESS, height);
-  wallRight.immovable = true;
-  
-  bricks = new Group();
-  
-  var offsetX = width/2-(COLUMNS-1)*(BRICK_MARGIN+BRICK_W)/2;
-  var offsetY = 80;
-  
-  for(var r = 0; r<ROWS; r++)
-    for(var c = 0; c<COLUMNS; c++) {
-      var brick = createSprite(offsetX+c*(BRICK_W+BRICK_MARGIN), offsetY+r*(BRICK_H+BRICK_MARGIN), BRICK_W, BRICK_H);
-      brick.shapeColor = color(255,255,255);
-      bricks.add(brick);
-      brick.immovable = true;
-    }
-  
-  //the easiest way to avoid pesky multiple collision is to 
-  //have the ball bigger than the bricks
-  ball = createSprite(width/2, height-200, 11, 11);
-  ball.maxSpeed = MAX_SPEED;
-  paddle.shapeColor = ball.shapeColor = color(255,255,255);
-  
+	wallBottom = createSprite(width/2, height+WALL_THICKNESS/2, width+WALL_THICKNESS*2, WALL_THICKNESS);
+	wallBottom.immovable = true;
+
+	wallLeft = createSprite(-WALL_THICKNESS/2, height/2, WALL_THICKNESS, height);
+	wallLeft.immovable = true;
+
+	wallRight = createSprite(width+WALL_THICKNESS/2, height/2, WALL_THICKNESS, height);
+	wallRight.immovable = true;
+	
+	ball = createSprite(mouseX, BALL_DEFAULT_Y, BALL_SIZE, BALL_SIZE);
+	ball.shapeColor = "red";
+	
+	paddle = createSprite(mouseX, PADDLE_Y, PADDLE_WIDTH, PADDLE_HEIGHT);
+	paddle.shapeColor = "red";
+	paddle.immovable = true;
+	
+	noStroke();
+	
+	noCursor();
 }
 
 function draw() {
-  background(0, 0, 0);
-  
-  paddle.position.x = constrain(mouseX, paddle.width/2, width-paddle.width/2);
-  
-  ball.bounce(wallTop);
-  ball.bounce(wallBottom);
-  ball.bounce(wallLeft);
-  ball.bounce(wallRight);
-  
-  if(ball.bounce(paddle))
-    {
-    var swing = (ball.position.x-paddle.position.x)/3;
-    ball.setSpeed(MAX_SPEED, ball.getDirection()+swing);
-    }
-  
-  ball.bounce(bricks, brickHit);
-  
-  drawSprites();
+	background("black");
+	
+	paddle.position.x = constrain(mouseX, PADDLE_WIDTH / 2, width - PADDLE_WIDTH / 2);
+	if (!ballInPlay) {
+		ball.position.x = paddle.position.x;
+	}
+	
+	ball.bounce(wallTop, ballHitOtherWall);
+	ball.bounce(wallLeft, ballHitOtherWall);
+	ball.bounce(wallRight, ballHitOtherWall);
+	ball.bounce(wallBottom, ballHitBottom);
+	
+	ball.bounce(paddle, ballHitPaddle);
+	ball.bounce(bricks, ballHitBrick);
+	
+	ballTrail.unshift([ball.position.x - BALL_SIZE / 2, ball.position.y - BALL_SIZE / 2]);
+	if (ballTrail.length > maxTrailLength) {
+		ballTrail.pop();
+	}
+	for (var i = 0; i < ballTrail.length; i++) {
+		alpha = map(i, 0, ballTrail.length - 1, 255, 0);
+		tempColor = color(255, 0, 0, alpha);
+		fill(tempColor);
+		rect(ballTrail[i][0], ballTrail[i][1], BALL_SIZE, BALL_SIZE);
+	}
+	
+	drawSprites();
 }
 
-function mousePressed() {
-  if(ball.velocity.x == 0 && ball.velocity.y == 0)
-    ball.setSpeed(MAX_SPEED, random(90-10, 90+10));
+function beep(frequency, length) {
+	tempOsc = new p5.Oscillator(frequency);
+	tempOsc.setType("square");
+	tempOsc.start();
+	tempOsc.stop(length);
 }
 
-function brickHit(ball, brick) {
-brick.remove();
+function mouseClicked() {
+	if (!ballInPlay) {
+		ball.velocity.y = 5;
+		ballInPlay = true;
+	}
+}
+
+function ballHitBrick(ball, brick) {
+	beep(beepFreq, 0.05);
+	brick.remove();
+}
+
+function ballHitPaddle(ball, paddle) {
+	angle = map(ball.position.x - paddle.position.x, -PADDLE_WIDTH / 2, PADDLE_WIDTH / 2, 270 - 45, 270 + 45);
+	ball.setSpeed(5, angle);
+	beep(beepFreq * 8, 0.05);
+}
+
+function ballHitOtherWall(ball, wall) {
+	beep(beepFreq * 4, 0.05);
+}
+
+function ballHitBottom(ball, wall) {
+	ball.setSpeed(0, 0);
+	ball.position.x = paddle.position.x;
+	ball.position.y = BALL_DEFAULT_Y;
+	ballInPlay = false;
+	beep(beepFreq, 0.5);	
 }
