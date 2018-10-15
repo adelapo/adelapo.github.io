@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- It's a secret to everybody! -->
+<!-- Thanks to Shinichi Mochizuki for such an inspirational website. -->
+<!-- And if you're looking for hints relating to MUSA's super-secret end-of-year event, you won't find them in the source code. -->
+<html>
+    <head>
+        <title>home page</title>
+    </head>
+    <style>
+        body {
+            background-image: url("background.png");
+        }
+        
+        h1 {
+            font-family: "Comic Sans MS";
+            font-weight: bold;
+            color: green;
+            font-size: 40pt;
+        }
+        
+        p {
+            font-size: 22pt;
+            color: white;
+        }
+    </style>
+    <script>
+        window.onload = function(e) {
+            prompt("Hello!");
+        }
+        
+        function setBackgroundTo(imageName) {
+            alert("seizure warning");
+            document.body.style.backgroundImage = url(imageName);
+        }
+    </script>
+    <body>
+        <h1>Welcome to the site of</h1>
+        <h1 style="background-color: white; color: black;">Andrew DeLapo</h1>
+        <p>Thanks for visiting my site. As a mathematician, it is my social responsibility to have an amazing website.</p>
+        <p>Click the links below to see some more stuff.</p>
+        
+        <img onclick="confirm('seizure warning (actually serious)'); document.body.style.backgroundImage = 'url(\'deadweek.gif\')';" src="deadweek.gif">
+        <img onclick="confirm('seizure warning (actually serious)'); document.body.style.backgroundImage = 'url(\'deadweek.gif\')';" src="deadweek.gif">
+        <img onclick="confirm('seizure warning (actually serious)'); document.body.style.backgroundImage = 'url(\'deadweek.gif\')';" src="deadweek.gif">
+        
+        <br>
+        <img onclick="confirm('seizure warning (actually serious)'); document.body.style.backgroundImage = 'url(\'giphy.webp\')';" src="giphy.webp">
+        <img onclick="confirm('seizure warning (actually serious)'); document.body.style.backgroundImage = 'url(\'giphy.webp\')';" src="giphy.webp">
+        <img onclick="confirm('seizure warning (actually serious)'); document.body.style.backgroundImage = 'url(\'giphy.webp\')';" src="giphy.webp">
+    </body>
+</html>
