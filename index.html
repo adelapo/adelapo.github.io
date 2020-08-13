@@ -3,6 +3,7 @@
 <head>
   <title>Andrew DeLapo</title>
   <link href="style.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
 </head>
 <body>
   <p><img src="img/me.jpg" style="float:right; width:350px"></p>
@@ -15,6 +16,12 @@
   <p>I have completed graduate-level courses in model theory and recursion theory. I wrote my senior honors thesis, <i>Bernoulli Randomness and Biased Normality</i>, under the supervision of Professor Theodore Slaman. The paper is currently under review for publication, and it is available <a href="https://arxiv.org/abs/2007.01854" target="_blank">as a pre-print on arXiv</a>.</p>
 
   <p>Those who are interested in dynamical systems are encouraged to see the <a href="https://github.com/adelapo/biased-normality-ifs" target="_blank">GitHub repository for the IFS Code Visualizer</a> program I wrote as part of my senior honors thesis. My thesis ends on a few open questions regarding iterated function systems and randomness, and the IFS Code Visualizer allows for computational exploration of those questions.</p>
+
+  <p>Below is some JavaScript code generating the Barnsley Fern using four different sequences. This code runs in the browser using the <a href="https://p5js.org/" target="_blank">p5.js</a> library for JavaScript. The code can be viewed <a href="ifs.js" target="_blank">here</a>. The visualization demonstrates that the speed at which the Barnsley Fern is generated can vary for different sequences, even though the sequences are all biased normal to the same probabilities. It is unknown (to me, at least) whether the same fractals are generated if the sequences are all biased normal to the same probabilities. The biasing algorithm from my paper is also implemented in the code to bias Champernowne's, Copeland-Erdos's, and Besicovitch's sequences.</p>
+
+  <div id="sketch1-div">
+    <script src="ifs.js"></script>
+  </div>
 
   <h1>Programming</h1>
   <p>I have coding experience both academically and from industry. Below is a full list of languages I have used, ordered from those with which I have the most experience to the least.</p>
@@ -33,7 +40,11 @@
       <li>Processing</li>
       <li>Android Studio</li>
     </ul>
-    <li>JavaScript</li>
+    <li>JavaScript, including</li>
+    <ul>
+      <li>p5.js</li>
+      <li>p5.play</li>
+    </ul>
     <li>HTML and CSS, see <a href="index.html">my website</a></li>
     <li>C</li>
     <li>C++</li>

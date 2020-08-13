@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Recursive');
 
 body {
   width: 60%;
@@ -12,5 +12,10 @@ p, li {
 }
 
 h1, h2 {
-  font-family: "Inconsolata";
+  font-family: "Recursive";
+}
+
+#sketch1-div {
+  display: table;
+  margin: 0 auto;
 }
