@@ -1,18 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Recursive');
 
 body {
-  width: 60%;
+  width: 75%;
   margin: auto;
   background-color: rgb(171, 197, 219);
 }
 
-p, li {
+p, li, label, input, option, select, button {
   font-family: "Open Sans";
   font-size: 16pt;
 }
 
 h1, h2 {
   font-family: "Recursive";
+}
+
+th, td {
+  font-family: "Open Sans";
+  font-size: 16pt;
+  /* width: 100px; */
+}
+
+table, th, td {
+  border: 2px solid black;
+  border-style:
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.probNumTd {
+  border-style: double;
+  border-left-width: 10px;
 }
 
 #sketch1-div {
