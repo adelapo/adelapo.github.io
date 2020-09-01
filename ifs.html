@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IFS Code Visualizer Web App</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/png" href="img/fractal_ice_circle.png">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <script src="ifs.js"></script>
+</head>
+<body>
+  <h1>IFS Code Visualizer Web App</h1>
+  <p>This is a web version of my IFS Code Visualizer app, which I originally wrote in Python. The GitHub repository for the Python app is <a href="https://github.com/adelapo/biased-normality-ifs">here</a>.</p>
+  <h2>Step 1: Input an IFS Code</h2>
+  <p>You can enter the IFS Code in the table below.</p>
+  <form action="javascript:numTransformationsSelected();">
+    <label for="num-transformations">Number of transformations: </label>
+    <input type="number" id="num-transformations" style="width: 100px">
+    <input type="submit">
+  </form>
+  <table id="ifs-code-table">
+    <tr>
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+      <th>e</th>
+      <th>f</th>
+      <th colspan=2 class="probNumTd">p=r/s</th>
+    </tr>
+  </table>
+  <p>Or, you can select one of these examples to autofill the above table.</p>
+  <form action="javascript:exampleCodeSelected();">
+    <select id="selected-example" onchange="exampleCodeSelected(this.options[this.selectedIndex].innerHTML)">
+      <option value="none">Select an example</option>
+      <option value="barnsley-fern">Barnsley Fern</option>
+      <option value="barnsley-fern">Castle</option>
+      <option value="barnsley-fern">Fractal Tree</option>
+      <option value="barnsley-fern">Patches</option>
+      <option value="barnsley-fern">Sierpinski Triangle</option>
+      <option value="barnsley-fern">Square</option>
+    </select>
+  </form>
+  <p>Or, you can upload a CSV file containing the IFS code. This is compatible with the IFS Code Visualizer Python program's CSV files.</p>
+  <form action="javascript:void(0);">
+    <input type="file" id="input-csv-file" accept=".csv">
+  </form>
+
+  <h2>Step 2: Select a Sequence</h2>
+  <form action="javascript:void(0);">
+    <label>Sequence:</label>
+    <select id="selected-sequence">
+      <option value="random">Pseudo-random number generator</option>
+      <option value="champernowne">Champernowne's sequence</option>
+      <option value="copeland-erdos">Copeland-Erdos sequence</option>
+      <option value="besicovitch">Besicovitch's sequence</option>
+    </select>
+    <input type="checkbox" id="use-bias" checked=true>
+    <label for="use-bias">Use biased sequence</label>
+  </form>
+
+  <h2>Step 3: Drawing Options</h2>
+  <form action="javascript:void(0);">
+    <label>Number of iterations:</label>
+    <input type="number" id="num-iterations" value=100000>
+  </form>
+
+  <h2>Step 4: Run</h2>
+  <p>Click the Run button to display the attractor of the IFS. The image can be moved around by clicking and dragging the mouse.</p>
+  <button onclick="javascript:runButtonClicked();">Run</button>
+
+  <div id="sketch-div">
+    <script src="ifs_page.js"></script>
+  </div>
+
+  <button onclick="javascript:zoomImage(1.5)">Zoom In</button>
+  <button onclick="javascript:zoomImage(2.0 / 3)">Zoom Out</button>
+  <button onclick="javascript:zoomToFit()">Zoom To Fit</button>
+  <button onclick="javascript:recenterImage()">Center</button>
+  <button onclick="javascript:saveImage()">Save Image</button>
+
+  <h2>Step 5 (Optional): Export the IFS Code</h2>
+  <button onclick="exportIfsCode()">Download IFS Code</button>
+
+  <p><a href="index.html">Home</a></p>
+</body>
+</html>
