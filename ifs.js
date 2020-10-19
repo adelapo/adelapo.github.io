@@ -15,7 +15,7 @@ var openSansFont;
 var dotsPerFrame = 100;
 
 function setup() {
-  canvas = createCanvas(windowWidth * 0.55, 600);
+  canvas = createCanvas(1020, 600);
   canvas.parent("sketch1-div");
 
   affTran0 = new AffineTransformation(0, 0, 0, 0.16, 0, 0);
