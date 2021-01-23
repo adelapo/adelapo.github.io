@@ -17,9 +17,14 @@ var playerHurt2WalkAnim;
 var playerWalkAnims;
 var playerShootAnims;
 var playerStandAnims;
-var MAX_AMMO = 75;
+var MAX_AMMO = 50;
 var ammoGroup;
 var ammoImage;
+var MAX_HEALTH = 60;
+var medkitGroup;
+var medkitImage;
+var heartImage;
+var walls;
 function preload(){
 	playerWalkAnim = loadAnimation("playerWalking_0.png", "playerWalking_2.png");
 	playerWalkAnim.frameDelay = 10;
@@ -52,19 +57,29 @@ function preload(){
 	zombieAnim = loadAnimation("zombie_0.png", "zombie_3.png");
 	zombieAnim.frameDelay = 10;
 	zombieDeadAnim = loadAnimation("zombieDead_0.png", "zombieDead_2.png");
-	ammoImage = loadImage("Bullet.png");
-	
+	ammoImage = loadImage("Ammo Box.png");
+	medkitImage = loadImage("MedKit.png");
+	heartImage = loadImage("Heart.png");
 }
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(100);
+	imageMode(CENTER);
 	player = createPlayer();
 	zombieGroup = new Group();
 	bulletGroup = new Group();
 	ammoGroup = new Group();
+	medkitGroup = new Group();
 	spawnZombies(5);
 	angleMode(DEGREES);
 	spawnCounter = 300;
+	
+	walls = new Group();
+	
+	wall1 = createWall(width/2, -30, width, 60);
+	wall2 = createWall(width/2, height + 30, width, 60);
+	wall3 = createWall(-30, height/2, 60, height);
+	wall4 = createWall(width + 30, height/2, 60, height);
 }
 
 function draw() {
@@ -76,6 +91,21 @@ function draw() {
 		if (touches.length > 0) {
 			player.attractionPoint(1, mouseX, mouseY);
 			player.friction = 0.1;
+		}
+		if  (random() < 0.003 && player.ammo <= 0) {
+			let pickup = createSprite(random(width), random(height), 100, 100);
+			pickup.addImage("ammo", ammoImage);
+			pickup.changeAnimation("ammo");
+			ammoGroup.add(pickup);
+			pickup.life = 450;
+		}
+		if (random() < 0.001 && player.health < 60) {
+			let pickup = createSprite(random(width), random(height), 100, 100);
+			pickup.addImage("medkit", medkitImage);
+			pickup.changeAnimation("medkit");
+			pickup.scale = 0.5
+			medkitGroup.add(pickup);
+			pickup.life = 500;
 		}
 
 		if (player.getAnimationLabel().includes("shooting")){
@@ -106,7 +136,9 @@ function draw() {
 		}
 		zombieGroup.collide(zombieGroup);
 		bulletGroup.bounce(zombieGroup, bulletCollideZombie);
+		player.collide(walls);
 		player.overlap(ammoGroup, playerPickupAmmo);
+		player.overlap(medkitGroup, playerPickupMedkit);
 		player.bounce(zombieGroup, playerCollideZombie);
 		if (spawnCounter > 0){
 			spawnCounter--;
@@ -125,10 +157,12 @@ function draw() {
 }
 
 function drawStats(){
+	image(heartImage, 30, 30, 50, 50);
 	fill("red");
 	rect(60, 10, width/4, 40);
 	fill("green");
-	rect(60, 10, map(player.health, 0, 60, 0, width/4), 40);
+	image(ammoImage, width - 30, 30, 50, 50)
+	rect(60, 10, map(player.health, 0, MAX_HEALTH, 0, width/4), 40);
 	fill("grey")
 	rect(width - 60 - width/4, 10, width/4, 40);
 	fill("orange");
@@ -140,7 +174,7 @@ function drawStats(){
 
 function createPlayer() {
 	let p = createSprite (width/2, height/2, 100, 100);
-	p.health = 60;
+	p.health = MAX_HEALTH;
 	p.setCollider("rectangle", 0, 1, 36, 57);
 	//p.debug = true;
 	p.addAnimation("standing0", playerStandAnim);
@@ -185,6 +219,17 @@ function createZombie(x, y) {
 	return z;
 }
 
+function createWall(x, y, wallWidth, wallHeight) {
+	wall = createSprite(x, y, wallWidth, wallHeight);
+	wall.shapeColor = color("#244b2e");
+	
+	wall.immovable = true;
+	wall.setDefaultCollider();
+	
+	walls.add(wall);
+	return wall;
+}
+
 function spawnZombies(n) {
 	for (let i = 0; i < n; i++) {
 		// createZombie(random(width), random(height));
@@ -220,12 +265,19 @@ function bulletCollideZombie(bullet, zombie) {
 	bullet.remove();
 	zombie.health--;
 	if (zombie.health <= 0) {
-		if (random(1) < 0.3){
-			let pickup = createSprite(zombie.position.x, zombie.position.y, 100, 100);
-			pickup.addImage("ammo", ammoImage);
-			pickup.changeAnimation("ammo");
-			ammoGroup.add(pickup);
-			
+		if (random(1) < 0.4){
+			if (random(1) < 0.5){
+				let pickup = createSprite(zombie.position.x, zombie.position.y, 100, 100);
+				pickup.addImage("ammo", ammoImage);
+				pickup.changeAnimation("ammo");
+				ammoGroup.add(pickup);
+			}else{
+				let pickup = createSprite(zombie.position.x, zombie.position.y, 100, 100);
+				pickup.addImage("medkit", medkitImage);
+				pickup.changeAnimation("medkit");
+				pickup.scale = 0.5
+				medkitGroup.add(pickup);
+			}
 		}
 		zombie.remove();
 	}
@@ -238,6 +290,10 @@ function playerCollideZombie(player, zombie){
 
 
 function playerPickupAmmo(player, pickup){
-	player.ammo = min(player.ammo + 15, MAX_AMMO);
+	player.ammo = min(player.ammo + 10, MAX_AMMO);
+	pickup.remove();
+}
+function playerPickupMedkit(player, pickup){
+	player.health = min(player.health + 15, MAX_HEALTH);
 	pickup.remove();
 }
