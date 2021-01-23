@@ -63,6 +63,7 @@ function preload(){
 }
 function setup() {
 	createCanvas(windowWidth, windowHeight);
+	noCursor();
 	background(100);
 	imageMode(CENTER);
 	player = createPlayer();
@@ -73,9 +74,9 @@ function setup() {
 	spawnZombies(5);
 	angleMode(DEGREES);
 	spawnCounter = 300;
-	
+
 	walls = new Group();
-	
+
 	wall1 = createWall(width/2, -30, width, 60);
 	wall2 = createWall(width/2, height + 30, width, 60);
 	wall3 = createWall(-30, height/2, 60, height);
@@ -84,10 +85,10 @@ function setup() {
 
 function draw() {
 	background("#106b43");
-	
+
 	if (player.health > 0){
-		
-	
+
+
 		if (touches.length > 0) {
 			player.attractionPoint(1, mouseX, mouseY);
 			player.friction = 0.1;
@@ -118,7 +119,7 @@ function draw() {
 			}else{
 				player.mirrorX(-1);
 			}
-			
+
 			if (abs(player.velocity.x) < 0.5){
 				player.setAnimWithHealth("standing");
 			} else {
@@ -188,7 +189,7 @@ function createPlayer() {
 	p.addAnimation("shooting2", playerHurt2ShootAnim);
 	p.addAnimation("dead", playerDeadAnim);
 	p.changeAnimation("walking0");
-	
+
 	p.setAnimWithHealth = function(name){
 		if (this.health >= 40){
 			index = 0;
@@ -200,7 +201,7 @@ function createPlayer() {
 		p.changeAnimation(name + index);
 		console.log(name + index);
 	}
-	
+
 	p.ammo = MAX_AMMO;
 	return p;
 }
@@ -222,10 +223,10 @@ function createZombie(x, y) {
 function createWall(x, y, wallWidth, wallHeight) {
 	wall = createSprite(x, y, wallWidth, wallHeight);
 	wall.shapeColor = color("#244b2e");
-	
+
 	wall.immovable = true;
 	wall.setDefaultCollider();
-	
+
 	walls.add(wall);
 	return wall;
 }
@@ -237,7 +238,7 @@ function spawnZombies(n) {
 		let c = sqrt(pow(width/2, 2)+ pow(height/2, 2));
 		let r = 2 * c;
 		createZombie(r * cos(angle)+ width/2, r * sin(angle)+ height/2);
-	}                                                                          
+	}
 }
 
 function mouseClicked() {
