@@ -5,14 +5,14 @@ var boardImage;
 var game;
 
 function preload() {
-  boardImage = loadImage("board/board.png");
+  boardImage = loadImage("scripts/board/board.png");
 
   pieceImages = {};
 
   let pieceNames = ["R", "N", "B", "Q", "K", "P"];
   for (let pieceName of pieceNames) {
-    pieceImages["w" + pieceName] = loadImage("board/" + "w" + pieceName + ".png");
-    pieceImages["b" + pieceName] = loadImage("board/" + "b" + pieceName + ".png");
+    pieceImages["w" + pieceName] = loadImage("scripts/board/" + "w" + pieceName + ".png");
+    pieceImages["b" + pieceName] = loadImage("scripts/board/" + "b" + pieceName + ".png");
   }
 }
 
