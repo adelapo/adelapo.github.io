@@ -15,6 +15,10 @@ h1, h2 {
   font-family: "Recursive";
 }
 
+h2 {
+  color: darkblue;
+}
+
 th, td {
   font-family: "Open Sans";
   font-size: 16pt;
