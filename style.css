@@ -13,6 +13,7 @@ p, li, label, input, option, select, button {
 
 h1, h2 {
   font-family: "Recursive";
+  font-weight: bold;
 }
 
 h2 {
