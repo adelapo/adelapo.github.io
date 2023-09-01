@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Andrew DeLapo</title>
+  <link rel="icon" type="image/png" href="img/fractal_ice_circle.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+</head>
+<body>
+  <div class="navbar">
+	<a href="index.html">Home</a>
+	<a href="research.html" class="active">Research</a>
+	<a href="notes.html">Notes</a>
+	<a href="teaching.html">Teaching</a>
+	<a href="cv.html">CV</a>
+  </div>
+  
+  <h1>Current Research</h1>
+  <p>I am currently involved in projects involving reverse mathematics and computable topology.</p>
+  
+  <h1>Undegraduate Research</h1>
+  
+  <p>I graduated from UC Berkeley in May 2020. I wrote my senior honors thesis, <i>Bernoulli Randomness and Bernoulli Normality</i>, under the supervision of Professor Theodore Slaman. The paper was published in <i>Mathematical Logic Quarterly</i> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/malq.202000082" target="_blank">here</a>. An earlier version is available as a pre-print on arXiv <a href="https://arxiv.org/abs/2007.01854" target="_blank">here</a>.</p>
+
+  <p>Those who are interested in dynamical systems are encouraged to see the <a href="https://github.com/adelapo/biased-normality-ifs" target="_blank">GitHub repository for the IFS Code Visualizer</a> program I wrote as part of my senior honors thesis. My thesis ends on a few open questions regarding iterated function systems and randomness, and the IFS Code Visualizer allows for computational exploration of those questions. A web version is now available <a href="ifs.html" target="_blank">here</a>.</p>
+
+  <p>Below, some JavaScript code is generating the Barnsley Fern using four different sequences. This code runs in the browser using the <a href="https://p5js.org/" target="_blank">p5.js</a> library for JavaScript. The code can be viewed <a href="ifs.js" target="_blank">here</a>. The visualization demonstrates that the speed at which the Barnsley Fern is generated can vary for different sequences, even though the sequences are all Bernoulli normal to the same probabilities. It is unknown (to me, at least) whether the same fractals are generated if the sequences are all Bernoulli normal to the same probabilities. The biasing algorithm from my paper is also implemented in the code to bias Champernowne's, Copeland-Erdos's, and Besicovitch's sequences.</p>
+
+  <div id="sketch1-div">
+    <script src="ifs.js"></script>
+  </div>
+
+  <p>Click <a href="barnsley_fern.html" target="_blank">here</a> to open it in a new tab.</p>
+</body>
+</html>
