@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clock</title>
+  <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
+  <link rel="icon" type="image/png" href="img/fractal_ice_circle.png">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Recursive');
+
+    body {
+      /* background-color: rgb(171, 197, 219); */
+	  background-color: gray;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+
+      /* This centers our sketch horizontally. */
+      justify-content: center;
+
+      /* This centers our sketch vertically. */
+      align-items: center;
+    }
+	
+	input {
+		border: none;
+		border-bottom: 2px solid black;
+		
+		font-family: "Open Sans";
+		font-size: 30pt;
+		text-align: center;
+	}
+  </style>
+</head>
+<body>
+  <div>
+    <script>
+		var darkMode = false;
+		var backgroundColor = "white";
+		
+		var textBox;
+		var darkModeButton;
+		
+		function setup() {
+			createCanvas(0.95 * windowWidth, 0.95 * windowHeight);
+			
+			textAlign(CENTER, CENTER);
+			textSize(windowHeight / 5);
+			
+			// let openSansFont = loadFont("Roboto");
+			textFont("Open Sans");
+			
+			textBox = createInput();
+			textBox.position(windowWidth/2 - 300, 2.5*windowHeight/4);
+			textBox.size(600);
+			
+			darkModeButton = createButton("Dark Mode");
+			darkModeButton.position(windowWidth - 200, windowHeight - 100);
+			darkModeButton.mousePressed(darkModeToggle);
+		}
+		
+		function draw() {
+			// background(171, 197, 219);
+			background(backgroundColor);
+			
+			let hourStr = hour();
+			let minStr = minute();
+			let secStr = second();
+			let suffix = "AM";
+			
+			if (hourStr >= 13) {
+				hourStr -= 12;
+				suffix = "PM";
+			}
+			
+			if (hourStr < 10) {
+				hourStr = "0" + hourStr;
+			}
+			if (minStr < 10) {
+				minStr = "0" + minStr;
+			}
+			if (secStr < 10) {
+				secStr = "0" + secStr;
+			}
+			
+			text(`${hourStr}:${minStr}:${secStr} ${suffix}`, width/2, height/2 - 100);
+			
+			textBox.position(windowWidth/2 - 300, 2.5*windowHeight/4);
+			darkModeButton.position(windowWidth - 200, windowHeight - 100);
+		}
+		
+		function darkModeToggle() {
+			darkMode = !darkMode;
+			
+			if (darkMode) {
+				backgroundColor = "black";
+				fill("white");
+				textBox.style("border-bottom", "2px solid white");
+				textBox.style("background-color", "black");
+				textBox.style("color", "white");
+				darkModeButton.html("Light Mode");
+			} else {
+				backgroundColor = "white";
+				fill("black");
+				textBox.style("border-bottom", "2px solid black");
+				textBox.style("background-color", "white");
+				textBox.style("color", "black");
+				darkModeButton.html("Dark Mode");
+			}
+		}
+		
+		function windowResized() {
+			resizeCanvas(0.95 * windowWidth, 0.95 * windowHeight);
+			textSize(windowHeight / 5);
+		}
+	</script>
+  </div>
+</body>
+</html>
