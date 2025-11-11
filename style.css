@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Recursive');
 
 body {
-  width: 75%;
+  width: 85%;
   margin: auto;
   background-color: rgb(171, 197, 219);
 }
@@ -13,6 +13,11 @@ p, li, label, input, option, select, button {
 
 p {
 	text-align: justify;
+}
+
+li {
+	margin: 10px 5px;
+	padding-left: 5px;
 }
 
 h1, h2 {
@@ -64,6 +69,7 @@ table {
 .navbar a {
   float: left;
   font-size: 20px;
+  font-weight: bold;
   color: white;
   text-align: center;
   padding: 14px 16px;
