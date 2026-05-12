@@ -3,10 +3,11 @@
 body {
   width: 85%;
   margin: auto;
-  background-color: rgb(171, 197, 219);
+  /* background-color: rgb(171, 197, 219); */
+  background-color: rgb(202, 218, 232);
 }
 
-p, li, label, input, option, select, button {
+p, li, label, input, option, select, button, figcaption {
   font-family: "Open Sans";
   font-size: 16pt;
 }
@@ -26,7 +27,8 @@ h1, h2 {
 }
 
 h2 {
-  color: #003262;
+  /* color: #003262; */
+  color: rgb(165, 28,48);
 }
 
 a {
@@ -64,6 +66,8 @@ table {
   background-color: black;
   font-family: "Open Sans";
 }
+
+
 
 /* Links inside the navbar */
 .navbar a {
