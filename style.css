@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Recursive');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Recursive|Roboto+Slab');
 
 body {
   width: 85%;
@@ -8,7 +8,7 @@ body {
 }
 
 p, li, label, input, option, select, button, figcaption {
-  font-family: "Open Sans";
+  font-family: "Roboto Slab";
   font-size: 16pt;
 }
 
@@ -22,7 +22,7 @@ li {
 }
 
 h1, h2 {
-  font-family: "Recursive";
+  font-family: "Roboto Slab";
   font-weight: bold;
 }
 
@@ -32,7 +32,8 @@ h2 {
 }
 
 a {
-  color: #003262;
+  /* color: #003262; */
+  color: rgb(165, 28,48);
 }
 
 th, td {
@@ -64,7 +65,8 @@ table {
 .navbar {
   overflow: hidden;
   background-color: black;
-  font-family: "Open Sans";
+  font-family: "Roboto Slab";
+  border-radius: 10px;
 }
 
 
@@ -73,7 +75,7 @@ table {
 .navbar a {
   float: left;
   font-size: 20px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -82,7 +84,8 @@ table {
 
 /* Add an active class to highlight the current page */
 .navbar a.active {
-  background-color: #003262;
+  /* background-color: #003262; */
+  background-color: rgb(165, 28,48);
 }
 
 /* Hide the link that should open and close the topnav on small screens */
@@ -110,7 +113,8 @@ table {
 
 /* Add a background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: #003262;
+  /* background-color: #003262; */
+  background-color: rgb(165, 28,48);
 }
 
 /* Dropdown content (hidden by default) */
