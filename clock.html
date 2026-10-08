@@ -74,9 +74,15 @@
 			let secStr = second();
 			let suffix = "AM";
 			
-			if (hourStr >= 13) {
-				hourStr -= 12;
+			if (hourStr >= 12) {
+				if (hourStr >= 13) {
+					hourStr -= 12;
+				}
 				suffix = "PM";
+			}
+			
+			if (hourStr == 0) {
+				hourStr = 12;
 			}
 			
 			if (hourStr < 10) {
